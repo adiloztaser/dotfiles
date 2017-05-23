@@ -1,0 +1,14 @@
+[user]
+	email = a@oztaser.com
+	name = Adil OZTASER
+[core]
+	editor = vim
+[alias]
+	st = status
+	l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset'
+	la = log --color --graph --oneline --decorate --all --
+	b = branch
+	pl = pull
+	ps = push
+	co = checkout
+	df = diff
