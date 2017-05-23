@@ -68,6 +68,10 @@ set t_Co=256
 set gfn=Monospace\ 10
 
 set term=gnome-256color
+if $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+set t_ut=
 
 " IndentLine
 let g:indentLine_enabled = 1
