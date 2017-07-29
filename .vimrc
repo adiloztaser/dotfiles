@@ -62,6 +62,7 @@ set shell=/bin/sh
 
 syntax on
 set number
+set relativenumber
 set showmode
 
 set t_Co=256
