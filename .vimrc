@@ -6,30 +6,16 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'grep.vim'
 Plugin 'duff/vim-trailing-whitespace'
-Plugin 'raimondi/delimitmate'
-Plugin 'majutsushi/tagbar'
-Plugin 'scrooloose/syntastic'
 Plugin 'yggdroot/indentline'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'stanangeloff/php.vim'
-Plugin 'captbaritone/better-indent-support-for-php-with-html'
-Plugin 'tomasr/molokai'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'gorodinskiy/vim-coloresque'
-Plugin 'tpope/vim-haml'
-Plugin 'mattn/emmet-vim'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-rake'
-Plugin 'tpope/vim-projectionist'
 Plugin 'thoughtbot/vim-rspec'
-Plugin 'ecomba/vim-ruby-refactoring'
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()
 filetype plugin indent on
@@ -46,9 +32,9 @@ set ttyfast
 set backspace=indent,eol,start
 
 "" Tabs
-set tabstop=4
+set tabstop=2
 set softtabstop=0
-set shiftwidth=4
+set shiftwidth=2
 set expandtab
 
 "" Map leader to ,
@@ -69,9 +55,6 @@ set t_Co=256
 set gfn=Monospace\ 10
 
 set term=gnome-256color
-if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
-endif
 set t_ut=
 
 " IndentLine
@@ -112,8 +95,7 @@ let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-nnoremap <silent> <F2> :NERDTreeFind<CR>
-noremap <F3> :NERDTreeToggle<CR>
+nnoremap <leader>d :NERDTreeToggle<cr>
 
 "" Split
 noremap <Leader>h :<C-u>split<CR>
@@ -124,12 +106,8 @@ nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 nnoremap <silent> <S-t> :tabnew<CR>
 
-" Tagbar
-nmap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-
 "" Clean search (highlight)
-nnoremap <silent> <leader><space> :noh<cr>
+nnoremap <leader><space> :noh<cr>
 
 "" Switching windows
 noremap <C-j> <C-w>j
@@ -137,13 +115,12 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
-let g:javascript_enable_domhtmlcss = 1
-
 autocmd FileType html set shiftwidth=2|set expandtab
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType sh setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 autocmd FileType vim setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 
 augroup vimrc-ruby
@@ -169,23 +146,16 @@ vnoremap <leader>rrlv :RRenameLocalVariable<cr>
 vnoremap <leader>rriv :RRenameInstanceVariable<cr>
 vnoremap <leader>rem  :RExtractMethod<cr>
 
-noremap <leader>b :CtrlPBuffer<CR>
-let g:ctrlp_map = '<leader>e'
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-
-" syntastic
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list=1
-let g:syntastic_aggregate_errors = 1
-
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
   let g:molokai_original = 1
   let g:rehash256 = 1
-  colorscheme molokai
+  colorscheme gruvbox
 endif
+
+set guioptions=
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
