@@ -7,15 +7,14 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'grep.vim'
 Plugin 'duff/vim-trailing-whitespace'
 Plugin 'yggdroot/indentline'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-rake'
-Plugin 'thoughtbot/vim-rspec'
 Plugin 'morhetz/gruvbox'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'lepture/vim-jinja'
+Plugin 'rust-lang/rust.vim'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on
@@ -44,18 +43,16 @@ let mapleader=','
 set hidden
 
 set showcmd
-set shell=/bin/sh
+set shell=/bin/zsh
 
 syntax on
 set number
 set relativenumber
 set showmode
 
+colorscheme gruvbox
+set bg=dark
 set t_Co=256
-set gfn=Monospace\ 10
-
-set term=gnome-256color
-set t_ut=
 
 " IndentLine
 let g:indentLine_enabled = 1
@@ -66,14 +63,6 @@ let g:indentLine_faster = 1
 "" Status bar
 set laststatus=2
 set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
-
-" vim-airline
-let g:airline_theme = 'powerlineish'
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
-let g:airline_skip_empty_sections = 1
 
 cnoreabbrev W! w!
 cnoreabbrev Q! q!
@@ -92,7 +81,6 @@ let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycach
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
-let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
 nnoremap <leader>d :NERDTreeToggle<cr>
@@ -115,7 +103,7 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
 
-autocmd FileType html set shiftwidth=2|set expandtab
+autocmd FileType html setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 autocmd Filetype javascript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType sh setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
@@ -123,39 +111,9 @@ autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 autocmd FileType php setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
 autocmd FileType vim setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 
-augroup vimrc-ruby
-  autocmd!
-  autocmd BufNewFile,BufRead *.rb,*.rbw,*.gemspec setlocal filetype=ruby
-  autocmd FileType ruby set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
-augroup END
-
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
-" Ruby refactory
-nnoremap <leader>rap  :RAddParameter<cr>
-nnoremap <leader>rcpc :RConvertPostConditional<cr>
-nnoremap <leader>rel  :RExtractLet<cr>
-vnoremap <leader>rec  :RExtractConstant<cr>
-vnoremap <leader>relv :RExtractLocalVariable<cr>
-nnoremap <leader>rit  :RInlineTemp<cr>
-vnoremap <leader>rrlv :RRenameLocalVariable<cr>
-vnoremap <leader>rriv :RRenameInstanceVariable<cr>
-vnoremap <leader>rem  :RExtractMethod<cr>
-
-let no_buffers_menu=1
-if !exists('g:not_finish_vimplug')
-  let g:molokai_original = 1
-  let g:rehash256 = 1
-  colorscheme gruvbox
-endif
-
-set guioptions=
-
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+let g:ycm_rust_src_path = '/Users/adil/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src'
