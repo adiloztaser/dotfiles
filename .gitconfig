@@ -3,6 +3,7 @@
 	name = Adil OZTASER
 [core]
 	editor = vim
+	excludesfile = ~/.gitignore
 [alias]
 	st = status
 	l = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset'
@@ -12,3 +13,5 @@
 	ps = push
 	co = checkout
 	df = diff
+[diff]
+	noprefix = true
