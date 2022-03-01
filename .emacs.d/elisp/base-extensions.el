@@ -1,8 +1,3 @@
-(use-package ace-jump-mode
-  :ensure t
-  :bind
-  ("C-c SPC" . ace-jump-mode))
-
 (use-package company
   :ensure t
   :config
@@ -18,30 +13,7 @@
   :bind
   ("C-=" . er/expand-region))
 
-(use-package helm
-  :ensure t
-  :init
-  (require 'helm-config)
-  :config
-  (setq helm-split-window-in-side-p t
-        helm-split-window-default-side 'below
-	helm-idle-delay 0.0
-	helm-input-idle-delay 0.01
-	helm-quick-update t
-	helm-ff-skip-boring-files t
-	helm-ff-allow-non-existing-file-at-point t)
-  (helm-mode 1)
-  :bind (("M-x" . helm-M-x)
-         ("C-x C-m" . helm-M-x)
-         ("C-x C-f" . helm-find-files)
-         ("C-x v" . helm-projectile)
-         ("C-x c o" . helm-occur)
-         ("C-x c p" . helm-projectile-ag)
-         ("C-x c k" . helm-show-kill-ring)
-         :map helm-map
-         ("<tab>" . helm-execute-persistent-action)))
-
-(use-package helm-projectile
+(use-package ag
   :ensure t)
 
 (use-package hlinum
@@ -81,30 +53,6 @@
   ("C-<" . mc/mark-previous-like-this)
   ("C-c C->" . mc/mark-all-like-this))
 
-(use-package org
-  :ensure t
-  :config
-  (setq org-directory "~/org-files"
-        org-default-notes-file (concat org-directory "/todo.org"))
-  :bind
-  ("C-c l" . org-store-link)
-  ("C-c a" . org-agenda))
-
-(use-package org-projectile
-  :ensure t
-  :config
-  (org-projectile-per-project)
-  (setq org-projectile-per-project-filepath "todo.org"
-	org-agenda-files (append org-agenda-files (org-projectile-todo-files))))
-
-(use-package org-bullets
-  :ensure t
-  :config
-  (setq org-hide-leading-stars t)
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (org-bullets-mode t))))
-
 (use-package page-break-lines
   :ensure t)
 
@@ -115,6 +63,7 @@
   (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-mode t)
+  (setq projectile-enable-caching t)
   (setq projectile-project-search-path '("~/sites/"))
   (add-to-list 'projectile-globally-ignored-files "jquery.js")
   (add-to-list 'projectile-globally-ignored-files "all.js")
@@ -128,6 +77,42 @@
   (add-to-list 'projectile-globally-ignored-files "*/**.min.css")
   (add-to-list 'projectile-globally-ignored-files "**/*.min.css"))
 
+(use-package helm
+  :ensure t
+  :init
+  (require 'helm-config)
+  :config
+  (setq helm-split-window-in-side-p t
+        helm-split-window-default-side 'below
+	helm-idle-delay 0.0
+	helm-input-idle-delay 0.01
+	helm-quick-update t
+	helm-ff-skip-boring-files t
+	helm-ff-allow-non-existing-file-at-point t)
+  (helm-mode 1)
+  :bind (("M-x" . helm-M-x)
+         ("C-x C-m" . helm-M-x)
+         ("C-x C-f" . helm-find-files)
+         ("C-x v" . helm-projectile)
+         ("C-x c o" . helm-occur)
+         ("C-x p s" . helm-projectile-ag)
+         ("C-x c k" . helm-show-kill-ring)
+         :map helm-map
+         ("<tab>" . helm-execute-persistent-action)))
+
+(use-package helm-projectile
+  :ensure t)
+
+(use-package helm-ag
+  :ensure t)
+
+(custom-set-variables
+ '(helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
+ '(helm-ag-command-option "--all-text")
+ '(helm-ag-insert-at-point 'symbol)
+ '(helm-ag-use-agignore t)
+ '(helm-ag-ignore-buffer-patterns '("\\.txt\\'" "\\.mkd\\'" "\\.min.\\'")))
+
 (use-package smartparens
   :ensure t)
 
@@ -138,9 +123,6 @@
   ("C-x <down>" . windmove-down)
   ("C-x <left>" . windmove-left)
   ("C-x <right>" . windmove-right))
-
-(use-package wgrep
-  :ensure t)
 
 (use-package yasnippet
   :ensure t
@@ -158,13 +140,9 @@
   :init
   (global-flycheck-mode))
 
-(use-package telephone-line
-  :ensure t 
-  :config
-  (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
-      telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
-      telephone-line-primary-right-separator 'telephone-line-cubed-right
-      telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
-  (telephone-line-mode t))
+(use-package dap-mode)
+(use-package which-key
+    :config
+    (which-key-mode))
 
 (provide 'base-extensions)

@@ -8,7 +8,6 @@
    ("\\.html?\\'" . web-mode)
    ("\\.phtml?\\'" . web-mode)
    ("\\.tpl\\.php\\'" . web-mode)
-   ("\\.php\\'" . web-mode)
    ("\\.[agj]sp\\'" . web-mode)
    ("\\.as[cp]x\\'" . web-mode)
    ("\\.erb\\'" . web-mode)

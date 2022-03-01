@@ -5,7 +5,4 @@
 (require 'base-extensions)
 
 (require 'lang-php)
-
-(require 'lang-javascript)
-
 (require 'lang-web)

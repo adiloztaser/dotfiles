@@ -1,7 +1,7 @@
-(use-package one-themes
+(use-package gruvbox-theme
   :ensure t
   :defer t
   :init
-  (load-theme 'one-dark t))
+  (load-theme 'gruvbox t))
 
 (provide 'base-theme)
